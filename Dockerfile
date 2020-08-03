@@ -75,6 +75,8 @@ RUN set -ex \
         /usr/share/doc \
         /usr/share/doc-base
         && install openssh-server
+RUN apt-get update && apt-get install -y openssh-server
+RUN echo 'root:Docker!' | chpasswd
 
 COPY script/entrypoint.sh /entrypoint.sh
 COPY config/airflow.cfg ${AIRFLOW_USER_HOME}/airflow.cfg

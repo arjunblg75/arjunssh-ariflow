@@ -65,6 +65,8 @@ RUN set -ex \
     && apt-get purge --auto-remove -yqq $buildDeps \
     && apt-get autoremove -yqq --purge \
     && apt-get clean \
+    && pip uninstall -y SQLAlchemy \
+    && pip install SQLAlchemy==1.3.15 \
     && rm -rf \
         /var/lib/apt/lists/* \
         /tmp/* \
@@ -76,7 +78,10 @@ RUN set -ex \
 COPY script/entrypoint.sh /entrypoint.sh
 COPY config/airflow.cfg ${AIRFLOW_USER_HOME}/airflow.cfg
 
-RUN chown -R airflow: ${AIRFLOW_USER_HOME}
+RUN chmod 777 /entrypoint.sh
+RUN chmod 777 ${AIRFLOW_USER_HOME}/airflow.cfg
+
+#RUN chown -R airflow: ${AIRFLOW_USER_HOME}
 
 EXPOSE 8080 5555 8793
 

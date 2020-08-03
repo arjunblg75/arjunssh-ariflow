@@ -79,6 +79,7 @@ RUN echo 'root:Docker!' | chpasswd
 
 COPY script/entrypoint.sh /entrypoint.sh
 COPY config/airflow.cfg ${AIRFLOW_USER_HOME}/airflow.cfg
+COPY sshd_config /etc/ssh/
 
 RUN chmod 777 /entrypoint.sh
 RUN chmod 777 ${AIRFLOW_USER_HOME}/airflow.cfg

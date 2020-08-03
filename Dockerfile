@@ -74,7 +74,6 @@ RUN set -ex \
         /usr/share/man \
         /usr/share/doc \
         /usr/share/doc-base
-        && install openssh-server
 RUN apt-get update && apt-get install -y openssh-server
 RUN echo 'root:Docker!' | chpasswd
 
